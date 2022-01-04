@@ -13,7 +13,7 @@ public class LdapOperationTest {
 
     @Test
     public void login() {
-        LdapOperation ldapOperation = new LdapOperation("ldap://212.129.137.221:389/",
+        LdapOperation ldapOperation = new LdapOperation("ldap://127.0.0.1:389/",
                 " cn=admin,dc=tetacloud2,dc=cn","123456");
         ldapOperation.login();
 
@@ -23,7 +23,7 @@ public class LdapOperationTest {
 
     @Test
     public void add() {
-        LdapOperation ldapOperation = new LdapOperation("ldap://212.129.137.221:389/",
+        LdapOperation ldapOperation = new LdapOperation("ldap://127.0.0.1:389/",
                 " cn=admin,dc=tetacloud2,dc=cn","123456");
         ldapOperation.login();
         Person person = new Person();
@@ -37,7 +37,7 @@ public class LdapOperationTest {
 
     @Test
     public void updatePerson() {
-        LdapOperation ldapOperation = new LdapOperation("ldap://212.129.137.221:389/",
+        LdapOperation ldapOperation = new LdapOperation("ldap://127.0.0.1:389/",
                 " cn=admin,dc=tetacloud2,dc=cn","123456");
         ldapOperation.login();
         Person person = new Person();
@@ -52,7 +52,7 @@ public class LdapOperationTest {
 
     @Test
     public void delete() {
-        LdapOperation ldapOperation = new LdapOperation("ldap://212.129.137.221:389/",
+        LdapOperation ldapOperation = new LdapOperation("ldap://127.0.0.1:389/",
                 " cn=admin,dc=tetacloud2,dc=cn","123456");
         ldapOperation.login();
         Person person = new Person();
@@ -71,7 +71,7 @@ public class LdapOperationTest {
     public void mockedUserLogin() {
         String username = "小白";
         String password = "123456";
-        LdapOperation ldapOperation = new LdapOperation("ldap://212.129.137.221:389/",
+        LdapOperation ldapOperation = new LdapOperation("ldap://127.0.0.1:389/",
                 " cn=admin,dc=tetacloud2,dc=cn","123456");
         ldapOperation.login();
         ldapOperation.userLogin(username,password);
