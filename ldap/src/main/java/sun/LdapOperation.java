@@ -65,9 +65,12 @@ public class LdapOperation {
 
             }
         } catch (NamingException e) {
-            e.printStackTrace();
+            try {
+                throw new NamingException(e.toString());
+            } catch (NamingException ex) {
+                ex.printStackTrace();
+            }
         }
-
         return person1;
     }
 
@@ -139,7 +142,7 @@ public class LdapOperation {
     public boolean userLogin(String username, String password) {
         Person person = search(username);
         System.out.println(person);
-        if(person!=null && person.getUsername().equals(username) && person.getPassword().equals(password)) {
+        if(person!=null && username.equals(person.getUsername()) && password.equals(person.getPassword())) {
             System.out.println("登录成功");
             return true;
         } else {

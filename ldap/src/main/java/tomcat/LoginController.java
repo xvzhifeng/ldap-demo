@@ -1,5 +1,7 @@
 package tomcat;
 
+import sun.LdapOperation;
+
 import javax.jws.WebService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,8 +34,20 @@ public class LoginController extends HttpServlet {
         PrintWriter out = response.getWriter();
         String title = "使用 LDAP 登录";
         // 处理中文
-        String name =new String(request.getParameter("name").getBytes("ISO-8859-1"),"UTF-8");
-        String password =new String(request.getParameter("password").getBytes("ISO-8859-1"),"UTF-8");
+        String name =new String(request.getParameter("name").getBytes("utf-8"),"UTF-8");
+        String password =new String(request.getParameter("password").getBytes("utf-8"),"UTF-8");
+        LdapOperation ldapOperation = new LdapOperation("ldap://212.129.137.221:389/",
+                " cn=admin,dc=tetacloud2,dc=cn","123456");
+        ldapOperation.login();
+        System.out.println(name + " " + password);
+        boolean islogin = ldapOperation.userLogin(name, password);
+        String status = "";
+        if(islogin) {
+            status = "登录成功";
+        } else {
+            status = "登录失败";
+        }
+
         String docType = "<!DOCTYPE html> \n";
         out.println(docType +
                 "<html>\n" +
@@ -43,8 +57,8 @@ public class LoginController extends HttpServlet {
                 "<ul>\n" +
                 "  <li><b>用户名：</b>："
                 + name + "\n" +
-                "  <li><b>密码：</b>："
-                + password + "\n" +
+                "  <li><b>登录状态：</b>："
+                + status + "\n" +
                 "</ul>\n" +
                 "</body></html>");
     }
