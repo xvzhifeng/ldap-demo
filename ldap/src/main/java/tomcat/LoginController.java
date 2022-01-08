@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet {
         // 处理中文
         String name =new String(request.getParameter("name").getBytes("utf-8"),"UTF-8");
         String password =new String(request.getParameter("password").getBytes("utf-8"),"UTF-8");
-        LdapOperation ldapOperation = new LdapOperation("ldap://212.129.137.221:389/",
+        LdapOperation ldapOperation = new LdapOperation("ldap://127.0.0.1:389/",
                 " cn=admin,dc=tetacloud2,dc=cn","123456");
         ldapOperation.login();
         System.out.println(name + " " + password);
